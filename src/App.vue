@@ -1,8 +1,12 @@
 <template>
-  <div id="nav">
+  <div class="wrapper">
     <Header />
+    <div class="wrapper-content">
+      <div class="container">
+        <router-view />
+      </div>
+    </div>
   </div>
-  <router-view />
 </template>
 <script>
 import Header from './components/Header.vue'
