@@ -9,6 +9,9 @@ export default createStore({
     setHumans(state, payload) {
       state.humans.push(...payload)
     },
+    clearHumans(state) {
+      state.humans = []
+    },
     setCurrentEpisode(state, payload) {
       state.currentEpisode = payload
     }

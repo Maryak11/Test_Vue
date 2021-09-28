@@ -2,6 +2,7 @@
 
   <div  style="text-align: center; margin: 2rem 0">
     <h1 class="title">Rick and Morty</h1>
+
   </div>
      <div class="filter-wrapper">
         <div class="search-container">
@@ -40,23 +41,26 @@
         </td>
       </tr>
     </tbody>
+    <Observer v-if="humans.length" @intersect="intersected"/>
   </table>
 </template>
 
 <script>
 import DataService from '../services/DataServices'
 import { mapState } from 'vuex'
+import Observer from '../components/Observer.vue'
 
 
 
 export default {
+  components: { Observer },
  
   name: 'Home',
 
   data() {
     return {
-      isLoading: true,
-      nameFilter: ''
+      nameFilter: '',
+      page: 1
     }
   },
   mounted() {
@@ -67,10 +71,18 @@ export default {
   },
   methods: {
     getHuman() {
-      DataService.getAll(1)
+      DataService.getAll(this.page)
         .then(res => this.$store.dispatch('setHumans', res.data.results))
         .catch(e => console.log(e))
+    },
+   intersected() {
+      this.page++;
+      this.getHuman()
     }
+  }, 
+  beforeUnmount() {
+    this.$store.commit('clearHumans')
+    this.page = 1
   }
 }
 </script>
