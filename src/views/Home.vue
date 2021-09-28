@@ -6,23 +6,18 @@
      <div class="filter-wrapper">
         <div class="search-container">
           <div class="input-wrapper">
-          <input class="input" type="text">
+          <span class="text-input">Поиск</span>
+          <input class="input" v-model='nameFilter' type="text">
           </div>
-          <select name="" id="">asdsa</select>
+          <select name="" id="">
+            <option value="">alive</option>
+            <option value="">dead</option>
+            <option value="">unknowm</option>
+          </select>
+          <div class="btn">Искать</div>
       </div>
     </div>
   <table >
-    <!-- <thead>
-      <tr>
-        <td>Имя</td>
-        <td>Разновидность</td>
-        <td>Фото</td>
-        <td>Эпизоды</td>
-      </tr>
-      
-    </thead> -->
- 
-     
     <tbody >
       <tr v-for="p in humans" :key="p.id">
         <td>
@@ -60,7 +55,8 @@ export default {
 
   data() {
     return {
-      isLoading: true
+      isLoading: true,
+      nameFilter: ''
     }
   },
   mounted() {
@@ -82,7 +78,7 @@ export default {
 <style lang="scss">
 .filter-wrapper {
   width: 100%;
-  background: hotpink;
+
   height: 60px;
   display: flex;
   align-items: center;
