@@ -1,7 +1,6 @@
 <template>
     <div style="text-align: center; margin: 2rem 0">
         <h1 class="title">Rick and Morty</h1>
-        {{ page }}
     </div>
     <div class="filter-wrapper">
         <div class="search-container">
@@ -15,7 +14,8 @@
             <div class="btn" @click="search()">Искать</div>
         </div>
     </div>
-    <table v-if="!error">
+    <div class="loading" v-show="isLoading"><loading /></div>
+    <table v-if="!error" v-show="!isLoading">
         <tbody>
             <tr v-for="p in humans" :key="p.id">
                 <td>
@@ -52,8 +52,9 @@
 import DataService from '../services/DataServices'
 import { mapState } from 'vuex'
 import Observer from '../components/Observer.vue'
+import Loading from '../components/Loading.vue'
 export default {
-    components: { Observer },
+    components: { Observer, Loading },
 
     name: 'Index',
 
@@ -64,6 +65,7 @@ export default {
             error: null,
             selectStatus: 'unknown',
             status: ['alive', 'dead', 'unknown'],
+            isLoading: true,
         }
     },
     mounted() {
@@ -86,6 +88,7 @@ export default {
             if (this.nameFilter === null && this.selectStatus === 'unknown') {
                 DataService.getAll(this.page)
                     .then((res) => {
+                        this.isLoading = false
                         this.lastPage = res.data.info.pages
                         this.$store.dispatch('setHumans', res.data.results)
                     })
@@ -99,6 +102,7 @@ export default {
             ) {
                 DataService.getFilteredCharacterName(this.page, this.nameFilter)
                     .then((res) => {
+                        this.isLoading = false
                         this.lastPage = res.data.info.pages
                         this.$store.dispatch('setHumans', res.data.results)
                     })
@@ -115,6 +119,7 @@ export default {
                     this.selectStatus
                 )
                     .then((res) => {
+                        this.isLoading = false
                         this.lastPage = res.data.info.pages
                         this.$store.dispatch('setHumans', res.data.results)
                     })
@@ -129,6 +134,7 @@ export default {
                     this.selectStatus
                 )
                     .then((res) => {
+                        this.isLoading = false
                         this.lastPage = res.data.info.pages
                         this.$store.dispatch('setHumans', res.data.results)
                     })
@@ -175,5 +181,8 @@ export default {
 .image {
     border-radius: 40px;
     max-width: 100px;
+}
+.loading {
+    top: 100%;
 }
 </style>
