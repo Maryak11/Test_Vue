@@ -15,6 +15,17 @@ class DataService {
   getCharacter(url) {
     return axios.get(`${url}`)
   }
+  getFilteredCharacterName(page, name) {
+    return axios.get(`${API_URL}/character/?page=${page}&name=${name}`)
+  }
+  getFilteredCharacterStatus(page, status) {
+    return axios.get(`${API_URL}/character/?page=${page}&status=${status}`)
+  }
+  getFilteredCharacterNameAndStatus(page, name, status) {
+    return axios.get(
+      `${API_URL}/character/?page=${page}&name=${name}&status=${status}`
+    )
+  }
 }
 
 export default new DataService()
