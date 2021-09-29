@@ -20,14 +20,16 @@
             <tr v-for="p in humans" :key="p.id">
                 <td>
                     <router-link
+                        class="a"
                         :to="{ name: 'Character', params: { charId: p.id } }"
                         >{{ p.name }}</router-link
                     >
                 </td>
                 <td>{{ p.status }}</td>
-                <td><img :src="p.image" alt="" /></td>
+                <td><img :src="p.image" class="image" alt="" /></td>
                 <td>
                     <router-link
+                        class="a"
                         :to="{
                             name: 'Episode',
                             params: { episodeId: episode },
@@ -169,5 +171,9 @@ export default {
     align-items: center;
     opacity: 3;
     transition: 1s;
+}
+.image {
+    border-radius: 40px;
+    max-width: 100px;
 }
 </style>

@@ -1,16 +1,11 @@
 export const app = {
-  title: 'Rick and Morty'
+    title: 'Rick and Morty',
 }
 
 export const links = [
-  {
-    title: 'Home',
-    alias: 'home',
-    url: '/'
-  },
-  {
-    title: 'About',
-    alias: 'about',
-    url: '/about'
-  }
+    {
+        title: 'Home',
+        alias: 'home',
+        url: '/',
+    },
 ]

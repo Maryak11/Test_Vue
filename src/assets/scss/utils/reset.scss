@@ -86,14 +86,13 @@ video {
   vertical-align: baseline;
 }
 
-a {
+a{
   text-decoration: none;
   &:active,
   &:hover {
     outline: 0;
   }
 }
-
 ul,
 li {
   list-style-type: none;
